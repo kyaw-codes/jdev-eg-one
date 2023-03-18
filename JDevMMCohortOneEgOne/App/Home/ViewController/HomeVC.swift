@@ -7,14 +7,23 @@
 
 import UIKit
 
+enum HomeSection {
+    case tellMeMore
+    case feature(String)
+    case account
+    case specialPerks(String)
+}
+
 final class HomeVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let tellMeMoreVO = TellMeMoreCellVO.mock
-    private let featureVOs = FeatureCellVO.allCases
-    private let accountVOs = BankAccountCellVO.mocks
-    private let specialPerksVOs = SpecialPerkCellVO.mocks
+    fileprivate let models: [SectionModel<HomeSection>] = [
+        .init(header: .feature("Features"), items: FeatureCellVO.allCases),
+        .init(header: .tellMeMore, items: [TellMeMoreCellVO.mock]),
+        .init(header: .specialPerks("Perks"), items: SpecialPerkCellVO.mocks),
+        .init(header: .account, items: BankAccountCellVO.mocks)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,52 +56,47 @@ final class HomeVC: UIViewController {
 // MARK: - DataSource
 extension HomeVC: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return featureVOs.count
-        } else if section == 2 {
-            return accountVOs.count
-        } else {
-            return specialPerksVOs.count
-        }
+        models[section].items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        let item = models[indexPath.section].items[indexPath.item]
+        switch item {
+        case is TellMeMoreCellVO:
             let cell = collectionView.deque(TellMeMoreCell.self, index: indexPath)
-            cell.vo = tellMeMoreVO
+            cell.vo = item.to(TellMeMoreCellVO.self)
             return cell
-        } else if indexPath.section == 1 {
+        case is FeatureCellVO:
             let cell = collectionView.deque(FeatureCell.self, index: indexPath)
-            cell.vo = featureVOs[indexPath.row]
+            cell.vo = item.to(FeatureCellVO.self)
             return cell
-        } else if indexPath.section == 2 {
+        case is BankAccountCellVO:
             let cell = collectionView.deque(BankAccountCell.self, index: indexPath)
-            cell.vo = accountVOs[indexPath.row]
+            cell.vo = item.to(BankAccountCellVO.self)
             return cell
-        } else {
+        case is SpecialPerkCellVO:
             let cell = collectionView.deque(SpecialPerkCell.self, index: indexPath)
-            cell.vo = specialPerksVOs[indexPath.row]
+            cell.vo = item.to(SpecialPerkCellVO.self)
             return cell
+        default:
+            return UICollectionViewCell()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 1 {
+        let header = models[indexPath.section].header
+        switch header {
+        case .feature(let title), .specialPerks(let title):
             let header = collectionView.dequeHeader(TextHeaderCell.self, index: indexPath)
-            header.lblTitle.text = "Feature"
+            header.lblTitle.text = title
             return header
-        } else if indexPath.section == 3 {
-            let header = collectionView.dequeHeader(TextHeaderCell.self, index: indexPath)
-            header.lblTitle.text = "Special Perks"
-            return header
+        default:
+            return .init()
         }
-        return .init()
     }
 }
 
@@ -101,14 +105,19 @@ extension HomeVC {
     
     private func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] section, _ in
-            if section == 0 {
+            let section = self?.models[section].header
+            
+            switch section {
+            case .tellMeMore:
                 return self?.makeTellMeMoreSection()
-            } else if section == 1 {
+            case .feature:
                 return self?.makeFeatureSection()
-            } else if section == 2 {
+            case .account:
                 return self?.makeBankAccountSection()
-            } else {
+            case .specialPerks:
                 return self?.makeSpecialPerksSection()
+            case .none:
+                return nil
             }
         }
     }

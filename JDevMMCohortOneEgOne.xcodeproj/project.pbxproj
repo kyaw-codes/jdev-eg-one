@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C88C243529C5B0DE00067DF5 /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88C243429C5B0DE00067DF5 /* SectionModel.swift */; };
 		C8DB87F729BE1D9900D1F7C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB87F629BE1D9900D1F7C0 /* AppDelegate.swift */; };
 		C8DB87F929BE1D9900D1F7C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB87F829BE1D9900D1F7C0 /* SceneDelegate.swift */; };
 		C8DB880029BE1D9A00D1F7C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8DB87FF29BE1D9A00D1F7C0 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C88C243429C5B0DE00067DF5 /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		C8DB87F329BE1D9900D1F7C0 /* JDevMMCohortOneEgOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JDevMMCohortOneEgOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DB87F629BE1D9900D1F7C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8DB87F829BE1D9900D1F7C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C88C243329C5B0D700067DF5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C88C243429C5B0DE00067DF5 /* SectionModel.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		C8DB87EA29BE1D9900D1F7C0 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 		C8DB881029BE1E0900D1F7C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C88C243329C5B0D700067DF5 /* Classes */,
 				C8DB881129BE1E1100D1F7C0 /* Extensions */,
 			);
 			path = Utilities;
@@ -342,6 +353,7 @@
 				C8DB882429BE40A300D1F7C0 /* FeatureCell.swift in Sources */,
 				C8DB880E29BE1DEB00D1F7C0 /* HomeVC.swift in Sources */,
 				C8DB883A29BECC7500D1F7C0 /* BankAccountCellVO.swift in Sources */,
+				C88C243529C5B0DE00067DF5 /* SectionModel.swift in Sources */,
 				C8DB881D29BE3D5B00D1F7C0 /* TellMeMoreCellVO.swift in Sources */,
 				C8DB881A29BE3B5200D1F7C0 /* TellMeMoreCell.swift in Sources */,
 				C8DB885A29BEDC0700D1F7C0 /* TextHeaderCell.swift in Sources */,

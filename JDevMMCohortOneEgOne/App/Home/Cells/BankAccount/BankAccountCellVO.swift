@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankAccountCellVO {
+struct BankAccountCellVO: SectionItem {
     let title: String
     let cardNo: String
     let availableBalance: Double

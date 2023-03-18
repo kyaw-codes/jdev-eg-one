@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpecialPerkCellVO {
+struct SpecialPerkCellVO: SectionItem {
     let image: String
     let percentage: Double
 }

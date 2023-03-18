@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TellMeMoreCellVO {
+struct TellMeMoreCellVO: SectionItem {
     let shortCode: String
     let name: String
     let desc: String

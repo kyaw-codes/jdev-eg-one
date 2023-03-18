@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum FeatureCellVO: CaseIterable {
+enum FeatureCellVO: CaseIterable, SectionItem {
     case send
     case transfer
     case cashback
